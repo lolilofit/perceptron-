@@ -22,7 +22,7 @@ int main() {
         }
     }
 
-    for(int i = 57; i < 93; i++) {
+    for(int i = 58; i < 93; i++) {
         auto line = data->data[i];
         std::vector<float> right_answer;
         for (int k = 3; k >= 1; k--) {
@@ -31,7 +31,7 @@ int main() {
         }
         std::vector<float> out = network->calk_output_vector(line);
         float error = network->calk_mistake(right_answer, out);
-        std::cout << "\nFinal mistake\n" << error;
+        std::cout << "\nCalculated mistake\n" << error;
     }
 
     return 0;

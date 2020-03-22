@@ -7,9 +7,8 @@
 #include <limits>
 #include "HiddenNeuron.h"
 
-float HiddenNeuron::activation_function(float value) {
 
-    //return (float)(value >= activation_step);
+float HiddenNeuron::activation_function(float value) {
     float exp_val = std::exp((-1.0f)*value);
     if(exp_val == std::numeric_limits<float>::infinity())
         throw -1;
@@ -44,8 +43,6 @@ void HiddenNeuron::calk_value() {
     this->set_value(value);
 }
 
-//????????
-//param - то, что должно быть на выходе
 float HiddenNeuron::calk_mistake(float target_val, float train_speed) {
     float summ = 0.0;
     for(auto edge : *outputEdges) {
@@ -66,6 +63,7 @@ float HiddenNeuron::calk_mistake(float target_val, float train_speed) {
     float val = get_value()*(1.0f - get_value())*summ;
     this->calculated_mistake = val;
 
+    //change output edges
     for(auto edge : *outputEdges) {
         Neuron* a_neuron = edge->get_a_neuron();
         Neuron* b_neuron = edge->get_b_neuron();
@@ -89,21 +87,11 @@ float HiddenNeuron::calk_mistake(float target_val, float train_speed) {
     return val;
 }
 
-void HiddenNeuron::set_input_edges(std::vector<Edge *> *inputEdges) {
-    this->inputEdges = inputEdges;
-}
-
-
 HiddenNeuron::HiddenNeuron() : Neuron() {
-    //this->activation_step = activation_step;
     inputEdges = new std::vector<Edge*>();
 }
 
 void HiddenNeuron::push_input_edge(Edge *edge) {
     inputEdges->push_back(edge);
-}
-
-std::vector<Edge *> *HiddenNeuron::get_input_edges() {
-    return inputEdges;
 }
 

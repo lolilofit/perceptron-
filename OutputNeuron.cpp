@@ -2,7 +2,6 @@
 // Created by User on 09.03.2020.
 //
 
-#include <cmath>
 #include <iostream>
 #include "OutputNeuron.h"
 
@@ -25,24 +24,10 @@ void OutputNeuron::calk_value() {
     this->set_value(total_sum);
 }
 
-//void OutputNeuron::set_result_value(float value) {
-//    this->resultValue = value;
-//}
-
-//float OutputNeuron::get_result_value() {
-//    return this->resultValue;
-//}
-
 float OutputNeuron::calk_mistake(float target_val, float train_speed) {
     float val = (target_val - this->get_value());
     this->calculated_mistake = val;
-    //float correction = (-1.0f)*neigh_val*train_speed*val;
-    //related_edge->set_updated_weigh(related_edge->getWeight() + correction);
     return val;
-}
-
-void OutputNeuron::setInputEdges(std::vector<Edge*>* edges) {
-    this->inputEdges = edges;
 }
 
 OutputNeuron::OutputNeuron() : Neuron() {
@@ -54,9 +39,6 @@ void OutputNeuron::push_input_edge(Edge *edge) {
     inputEdges->push_back(edge);
 }
 
-std::vector<Edge *> *OutputNeuron::get_input_edges() {
-    return  inputEdges;
-}
 
 
 

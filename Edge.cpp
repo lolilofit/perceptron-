@@ -34,14 +34,5 @@ void Edge::set_b_nueron(Neuron *neuron) {
     b_neuron = neuron;
 }
 
-float Edge::get_updated_weigh() {
-    return updated_weigh;
-}
-
-void Edge::set_updated_weigh(float new_val) {
-    updated_weigh = new_val;
-}
-
-
 
 

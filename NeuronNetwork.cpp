@@ -17,7 +17,7 @@ void NeuronNetwork::build_initial_network(const std::string& config_file_name) {
     config_input.open("..\\resources\\" + config_file_name);
     std::string line, token;
     getline(config_input, line);
-    this->n = std::stof(line);
+    this->education_speed = std::stof(line);
     getline(config_input, line);
     int layers_num = std::stoi(line);
     int i = 0;
@@ -137,7 +137,7 @@ float NeuronNetwork::calk_mistake(std::vector<float> &rightanswer, std::vector<f
         throw std::exception();
 
     float error = 0.0;
-    int el_num;
+    int el_num = 0;
     for(int i = 0; i < result.size(); i++) {
         if(result[i] != std::numeric_limits<float>::infinity() && rightanswer[i] != std::numeric_limits<float>::infinity()) {
             error += (float) std::pow((result[i] - rightanswer[i]), 2.0f);
@@ -167,7 +167,7 @@ void NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &d
             auto *outputNeuron = (*layer)[i];
             float expec_val = 0.0;
             expec_val = rightanswer[i];
-            outputNeuron->calk_mistake(expec_val, n);
+            outputNeuron->calk_mistake(expec_val, education_speed);
         }
 
         std::vector<HiddenNeuron*>* hidden_layer;
@@ -175,7 +175,7 @@ void NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &d
             hidden_layer = all_layers[i];
             for (int j = 0; j < layer->size(); j++) {
                 HiddenNeuron* neuron = (*hidden_layer)[j];
-                neuron->calk_mistake(0.0f, n);
+                neuron->calk_mistake(0.0f, education_speed);
             }
         }
 
@@ -190,13 +190,13 @@ void NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &d
                     if (neuron != b_neuron) {
                         if (b_neuron->get_should_count()) {
                             float grad = neuron->get_value() * b_neuron->get_calculated_mistake();
-                            edge->setWeigh(edge->getWeight() + n * grad);
+                            edge->setWeigh(edge->getWeight() + education_speed * grad);
                         }
                     }
                     if (neuron != a_neuron) {
                         if (a_neuron->get_should_count()) {
                             float grad = neuron->get_value() * b_neuron->get_calculated_mistake();
-                            edge->setWeigh(edge->getWeight() + n * grad);
+                            edge->setWeigh(edge->getWeight() + education_speed * grad);
                         }
                     }
                     if ((neuron == a_neuron && neuron == b_neuron) || (neuron != a_neuron && neuron != b_neuron))

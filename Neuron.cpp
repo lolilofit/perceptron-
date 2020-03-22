@@ -6,10 +6,6 @@
 #include "Neuron.h"
 
 
-void Neuron::set_output_edges(std::vector<Edge *> *edges) {
-        outputEdges = edges;
-}
-
 float Neuron::get_value() {
     return value;
 }
@@ -31,10 +27,6 @@ Neuron::Neuron() {
 }
 
 void Neuron::calk_value() {}
-
-std::vector<Edge *> *Neuron::get_input_edges() {
-    return nullptr;
-}
 
 float Neuron::calk_mistake(float target_val, float train_speed) {
     return 0.0;
