@@ -93,7 +93,10 @@ NeuronNetwork::NeuronNetwork(Data *data) {
 }
 
 NeuronNetwork::~NeuronNetwork() {
-    //clear all layers
+    delete[](input_layer);
+    delete[](output_layer);
+    for(int i = 0; i < all_layers.size(); i++)
+        delete[](all_layers[i]);
 }
 
 std::vector<float> NeuronNetwork::calk_output_vector(std::vector<float> &in) {
