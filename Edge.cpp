@@ -5,7 +5,7 @@
 #include "Neuron.h"
 
 Edge::Edge() {
-        weigh = 0.008f;
+        weigh = 0.01f;
         a_neuron = nullptr;
         b_neuron = nullptr;
 }

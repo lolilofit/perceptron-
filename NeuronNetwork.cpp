@@ -147,7 +147,7 @@ float NeuronNetwork::calk_mistake(std::vector<float> &rightanswer, std::vector<f
     return std::pow(error, 0.5f)/(float)el_num;
 }
 
-void NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &data, float epsilon) {
+float NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &data, float epsilon) {
 
     for(int i = 0; i < rightanswer.size(); i++) {
         auto ans = rightanswer[i];
@@ -160,8 +160,8 @@ void NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &d
     std::vector<float> out = this->calk_output_vector(data);
     float error = calk_mistake(rightanswer, out);
 
-    while (error > epsilon) {
-        std::cout << error << "\n";
+   // while (error > epsilon) {
+    //        std::cout << error << "\n";
         std::vector<OutputNeuron*>* layer = this->output_layer;
         for (int i = 0; i < layer->size(); i++) {
             auto *outputNeuron = (*layer)[i];
@@ -207,6 +207,7 @@ void NeuronNetwork::train(std::vector<float> &rightanswer, std::vector<float> &d
 
         std::vector<float> pp = this->calk_output_vector(data);
         error = calk_mistake(rightanswer, pp);
-    }
+        //std::cout << error << "\n";
+        return error;
 }
 

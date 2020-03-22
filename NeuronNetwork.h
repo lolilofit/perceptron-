@@ -28,7 +28,7 @@ public:
     void build_initial_network(const std::string& config_file_name);
     std::vector<float> calk_output_vector(std::vector<float> &in);
     float calk_mistake(std::vector<float> &rightanswer, std::vector<float> &result);
-    void train(std::vector<float> &rightanswer, std::vector<float> &data, float epsilon);
+    float train(std::vector<float> &rightanswer, std::vector<float> &data, float epsilon);
 };
 
 #endif //NEIRLAB3_NEURONNETWORK_H
