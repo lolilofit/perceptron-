@@ -34,12 +34,14 @@ int main() {
             total_error += error;
             std::cout << "Epoch - " << i << "; Error - " << error << "\n";
         }
-        std::cout << "Total Error: " << total_error/float(56.0f) << "\n";
+        std::cout << "Total Test Error: " << total_error/float(56.0f) << "\n";
         total_error = 0.0f;
         std::cout << "-----------\n";
     }
 
-    for(int i = 58; i < 93; i++) {
+    float total_check_error = 0.0;
+
+    for(int i = 56; i < data->data.size(); i++) {
         auto line = data->data[i];
         std::vector<float> right_answer;
         for (int k = 3; k >= 1; k--) {
@@ -48,8 +50,10 @@ int main() {
         }
         std::vector<float> out = network->calk_output_vector(line);
         float error = network->calk_mistake(right_answer, out);
+        total_check_error += error;
         std::cout << "\nCalculated mistake\n" << error;
     }
 
+    std::cout << "\nTotal check error: " << total_check_error / (float)(data->data.size() - 56);
     return 0;
 }
